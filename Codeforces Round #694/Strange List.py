@@ -54,24 +54,22 @@ def binomial(n, k):
         return div  
 
 for _ in range(inp()):
-    n, k = invr()
-    nums  = invr()
+    n, x = invr()
+    arr = invr()
 
-    ind = -1
-    flag = True
+    ans = sum(arr)
+    f = True
+    c = 1
 
-    while k:
-        for i in range(n-1):
-            if nums[i] < nums[i+1]:
-                nums[i]+=1
-                ind = i
+    while f == True:
+        for i in range(n):
+            res = arr[i] // x
+            if arr[i] % x == 0:
+                ans += res * (x**c)
+                arr[i] = res
+            else:
+                f = False
                 break
-        else:
-            print -1
-            flag = False
-            break
+        c += 1
 
-        k -= 1
-
-    if flag:
-        print ind+1
+    print ans

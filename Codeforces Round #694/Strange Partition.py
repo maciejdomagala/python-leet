@@ -54,26 +54,13 @@ def binomial(n, k):
         return div  
 
 for _ in range(inp()):
-    x, y = invr()
+    n, x = invr()
+    arr = invr()
+    mi, ma = 0,0
 
-    s = insr()
+    for a in arr:
+        ma += ceil(a/x)
 
-    if x >= 0:
-        if s.count('R') < x:
-            print 'NO'
-            continue
-    if x < 0:
-        if s.count('L') < abs(x):
-            print 'NO'
-            continue
+    mi = ceil(sum(arr)/x)
 
-    if y >= 0:
-        if s.count('U') < y:
-            print 'NO'
-            continue
-    if y < 0:
-        if s.count('D') < abs(y):
-            print 'NO'
-            continue 
-
-    print 'YES'
+    print int(mi), int(ma)

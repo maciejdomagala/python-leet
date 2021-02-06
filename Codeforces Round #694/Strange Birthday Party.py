@@ -54,49 +54,22 @@ def binomial(n, k):
         return div  
 
 for _ in range(inp()):
-    k, p1 = invr()
-    colors_now = invr()
-    colors_later = invr()
-    painters = invr()
-    ans = []
-    f = False
+    n, m = invr()
+    ints = invr()
+    prices = invr()
 
-    dem, demi =[], []
-    for i, (a,b) in enumerate(zip(colors_now, colors_later)):
-        if a != b:
-            dem.append(b)
-            demi.append(i)
+    ints.sort(reverse=True)
+    c = 0
+    ans=0
 
-    for i,a in enumerate(dem):
-        if a == painters[-1]:
-            last_color = demi[i]
-            f = True
-            break
-
-    if f == False:
-        for i, a in enumerate(colors_later):
-            if a == painters[-1]:
-                last_color = i
-                break
+    for i, num in enumerate(ints):
+        if prices[c] < prices[num-1]:
+            ans += prices[c]
+            if c < m-1:
+                c+=1
         else:
-            print 'NO'
-            continue
+            ans += prices[num-1]
 
-    ans=[]
+    print ans
 
-    for p in painters[::-1]:
-        for i, a in enumerate(dem):
-            if a == p:
-                ans.append(demi[i])
-                dem.pop(i)
-                demi.pop(i)
-                break
-        else:
-            ans.append(last_color)
 
-    if len(dem) == 0:
-        print 'YES'
-        print ' '.join([str(a+1) for a in ans[::-1]])
-    else:
-        print 'NO'
-    
