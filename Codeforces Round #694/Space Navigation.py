@@ -54,9 +54,26 @@ def binomial(n, k):
         return div  
 
 for _ in range(inp()):
-    n, m = invr()
+    x, y = invr()
 
-    x = invr()
-    y = invr()
+    s = insr()
 
-    print n+m - len(set(x+y))
+    if x >= 0:
+        if s.count('R') < x:
+            print 'NO'
+            continue
+    if x < 0:
+        if s.count('L') < abs(x):
+            print 'NO'
+            continue
+
+    if y >= 0:
+        if s.count('U') < y:
+            print 'NO'
+            continue
+    if y < 0:
+        if s.count('D') < abs(y):
+            print 'NO'
+            continue 
+
+    print 'YES'
