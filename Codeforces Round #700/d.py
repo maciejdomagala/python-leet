@@ -51,22 +51,22 @@ def binomial(n, k):
         b = math.factorial(k)
         c = math.factorial(n-k)
         div = a // (b * c)
-        return div 
+        return div  
 
-for _ in range(inp()):
-    s = insr()
-    ans = []
+n = inp()
+arr = invr()
 
-    for i,a in enumerate(s):
-        if i % 2 == 0:
-            if a == 'a':
-                ans.append('b')
-            else:
-                ans.append('a')
-        else:
-            if a == 'z':
-                ans.append('y')
-            else:
-                ans.append('z')
+a,b = -1,-1
 
-    print ''.join([str(a) for a in ans])
+seq = 0
+
+for e in arr:
+    if a != e:
+        a = e
+        seq += 1
+    else:
+        if b != e:
+            seq += 1
+            b = e
+
+print seq

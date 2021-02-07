@@ -1,6 +1,10 @@
+from __future__ import division
 import sys
-from collections import Counter
 input = sys.stdin.readline
+import math
+from math import sqrt, floor, ceil
+from collections import Counter
+
 
 ############ ---- Input Functions ---- ############
 def inp():
@@ -16,22 +20,59 @@ def insr2():
     s = input()
     return(s.split(" "))
 
-for _ in range(inp()):
-    n = inp()
-    a =  insr()
-    b = insr()
+def prime_factorization(n):
 
-    ca,cb = 0,0
+    if n == 1:
+        return [1]
 
-    for i,j in zip(a,b):
-        if int(i) > int(j):
-            ca += 1
-        elif int(i) < int(j):
-            cb += 1
+    ans=[]
+    i = 2
+    cap = sqrt(n)
+    while i <= cap:
+        if n % i == 0:
+            ans.append(i)
+            n = n//i
+            cap=sqrt(n)
+        else:
+            i += 1
+    if n > 1:
+        ans.append(n)
+    return ans
 
-    if ca > cb:
-        print 'RED'
-    elif ca < cb:
-        print 'BLUE'
+def binomial(n, k):
+    if n == 1 or n == k:
+        return 1
+
+    if k > n:
+        return 0       
     else:
-        print 'EQUAL'
+        a = math.factorial(n)
+        b = math.factorial(k)
+        c = math.factorial(n-k)
+        div = a // (b * c)
+        return div  
+
+for _ in range(inp()):
+    A, B, n = invr()
+    a = invr()
+    b = invr()
+    mon = [(y, x) for x, y in sorted(zip(b, a))]
+
+    a = [mon[i][0] for i in range(n)]
+    b = [mon[i][1] for i in range(n)] 
+
+    high = -1
+    dmg_max = -1
+
+    dmg = [-1]*n
+    for i in range(n):
+        dmg[i] = int(ceil(b[i]/A) * a[i])
+        if dmg[i] >= dmg_max:
+            dmg_max = dmg[i]
+            if a[i] > high:
+                high = a[i]
+
+    if sum(dmg)-high <= B:
+        print 'YES'
+    else:
+        print 'NO'
