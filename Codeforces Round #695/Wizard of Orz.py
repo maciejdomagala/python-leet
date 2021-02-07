@@ -55,21 +55,19 @@ def binomial(n, k):
 
 for _ in range(inp()):
     n = inp()
-    arr=invr()
+    
+    s = '989'
 
-    arr.sort(reverse=True)
-    a, b =0,0
-    for i in range(n):
-        if arr[i] % 2 == 0:
-            if i % 2 == 0:
-                a += arr[i]
-        else:
-            if i % 2 == 1:
-                b += arr[i]
+    if n <= 3:
+        print s[:n]
+        continue
 
-    if a > b:
-        print 'Alice'
-    elif a < b:
-        print 'Bob'
-    else:
-        print 'Tie'
+    div=(n-3)//10
+    mod = (n-3)%10
+
+    s = ''.join([s, ''.join(['0123456789' for a in range(div)])])
+    for i in range(mod):
+        s += str(i)
+
+    print int(s)
+

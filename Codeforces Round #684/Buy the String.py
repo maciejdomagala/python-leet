@@ -53,30 +53,19 @@ def binomial(n, k):
         div = a // (b * c)
         return div  
 
-"""
-assuming that n is even, n%2==0:
-we make n//2 moves horizontally and n//2 moves vertically
-and these moves can be thought of as independent.
+for _ in range(inp()):
+    n, c0, c1, h = invr()
 
-if n = 10, we make 5 moves left-right and 5 moves up-down.
-when making 5 up-down moves, we can end up in 6 positions, we can choose 0up5down, ...., 5up0down.
-same with left right, so we get 6*6
+    s = insr()
 
-if n is odd e..g n = 11, we can get 6 updown and 5 leftright or 6 leftright and 5 updown.
-we cannot end in the same positions in both approaches since parity.
-so we have 6*7 times 2 there
+    if min(c0, c1) + h < max(c0,c1):
+        if c0 < c1:
+            big = '1'
+        else:
+            big = '0'
+        
+        ans = h * s.count(big) + len(s) * min(c0,c1)
+    else:
+        ans = s.count('1') * c1 + s.count('0') * c0
 
-e.g.
-for n = 3:
-    2 * (2) * (3) = 6
-
-"""
-
-n = inp()
-
-if n % 2 == 0:
-    ans = (n//2 + 1)**2
-else:
-    ans = 2 * ((n+1)//2) * ((n+1)//2 + 1)
-
-print ans
+    print ans
