@@ -60,13 +60,20 @@ a,b = -1,-1
 
 seq = 0
 
-for e in arr:
-    if a != e:
+for i, e in enumerate(arr):
+    if e == a and e == b:
         a = e
-        seq += 1
+    elif e == a:
+        seq+=1
+        b = e
+    elif e == b:
+        seq+=1
+        a=e
     else:
-        if b != e:
-            seq += 1
-            b = e
+        if i == len(arr)-1:
+            seq+=1
+        else:
+            
+
 
 print seq
