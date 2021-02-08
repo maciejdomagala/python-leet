@@ -60,20 +60,21 @@ a,b = -1,-1
 
 seq = 0
 
-for i, e in enumerate(arr):
-    if e == a and e == b:
-        a = e
-    elif e == a:
-        seq+=1
-        b = e
-    elif e == b:
-        seq+=1
-        a=e
-    else:
-        if i == len(arr)-1:
-            seq+=1
+i = 0
+while i < n:
+    if a!=arr[i] and b!=arr[i]:
+        if i<n-1 and arr[i+1]==a:
+            a=arr[i]
         else:
-            
+            b=arr[i]
+        seq+=1
+    elif a!=arr[i]:
+        a=arr[i]
+        seq+=1
+    elif b!=arr[i]:
+        b=arr[i]
+        seq+=1
 
+    i+=1
 
 print seq
