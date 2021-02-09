@@ -51,9 +51,11 @@ def binomial(n, k):
         b = math.factorial(k)
         c = math.factorial(n-k)
         div = a // (b * c)
-        return div 
+        return div  
 
 for _ in range(inp()):
     n = inp()
 
-    print int(ceil((n+1)//2))
+    print ' '.join([str(n) for a in range(n)])
+
+    
