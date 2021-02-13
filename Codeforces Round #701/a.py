@@ -5,6 +5,7 @@ input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
 from collections import Counter
+from copy import deepcopy as dc
 
 
 ############ ---- Input Functions ---- ############
@@ -55,6 +56,23 @@ def binomial(n, k):
 
 for _ in range(inp()):
     a,b = invr()
-    a2, b2 = copy(a), copy(b)
+    mx=1e10
+    add = False
+    if b == 1:
+        add = True
+        b = 2
 
-    for 
+    for i in range(30):
+        c=i
+        div = b+i   
+        res = dc(a)
+
+        while res > 0:
+            c += 1
+            res //= div
+        if c < mx:
+            mx = c
+
+    print mx+1 if add else mx
+
+

@@ -53,7 +53,18 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-for _ in range(inp()):
-    a, b = invr()
+
+n,q,k= invr()
+arr=invr()
+
+for _ in range(q):
+    l,r = invr()
+
+    ones = arr[l-1]-1 + k-arr[r-1]
+    zeros = r-l+1
+    twos = k-ones-zeros
+    ans = ones+2*twos
+
+    print ans
 
     
