@@ -18,6 +18,8 @@ def insr():
 def invr():
     return(map(int,input().split()))
 def insr2():
+        a = math.factorial(n)
+        b = math.factorial(k)
     s = input()
     return(s.split(" "))
 
@@ -54,7 +56,4 @@ def binomial(n, k):
         return div 
 
 for _ in range(inp()):
-    a,b = invr()
-    a2, b2 = copy(a), copy(b)
-
-    for 
+    

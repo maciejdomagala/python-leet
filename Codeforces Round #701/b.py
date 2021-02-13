@@ -54,7 +54,6 @@ def binomial(n, k):
         return div 
 
 for _ in range(inp()):
-    a,b = invr()
-    a2, b2 = copy(a), copy(b)
+    a, b = invr()
 
-    for 
+    
