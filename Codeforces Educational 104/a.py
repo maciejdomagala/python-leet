@@ -55,4 +55,9 @@ def binomial(n, k):
         return div 
 
 for _ in range(inp()):
-    
+    n=inp()
+    arr=invr()
+    mi = min(arr)
+    num = arr.count(mi)
+
+    print(n-num)

@@ -55,22 +55,3 @@ def binomial(n, k):
         return div 
 
 for _ in range(inp()):
-    n= inp()
-    a = insr()
-    b = insr()
-
-    opsa, opsb=[],[]
-
-    for i in range(n-1):
-        if a[i] != a[i+1]:
-            opsa.append(i+1)
-        if b[i] != b[i+1]:
-            opsb.append(i+1)
-
-    if b[-1] != a[-1]:
-        opsb.append(n)
-
-    ans = opsa + opsb[::-1]
-    ans.insert(0, len(ans))
-    
-    print(' '.join([str(a) for a in ans]))

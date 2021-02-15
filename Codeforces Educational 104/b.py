@@ -55,26 +55,21 @@ def binomial(n, k):
 
 
 for _ in range(inp()):
-    n = inp()
-    arr = invr()
+    n, k = invr()
 
-    c=0
+    if n % 2 == 0:
+        print n if k % n == 0 else k % n
+        continue
 
-    for a in arr:
-        if a == 1:
-            c+=1
-        else:
-            break
+    mod = k % n
+    if mod == 0:
+        mod = n
 
-    if c == n:
-        if n%2==1:
-            print('First')
-            continue
-        else:
-            print('Second')
-            continue
-    
-    if c%2 == 0:
-        print('First')
-    else:
-        print('Second')
+    cycle = n//2
+
+    div = int(ceil(k/cycle))
+
+    ans = mod + div - 1
+    ans = ans % n
+
+    print n if ans == 0 else ans
