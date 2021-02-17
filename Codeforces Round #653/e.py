@@ -4,7 +4,7 @@ import sys
 input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
-from collections import Counter
+from collections import Counter, defaultdict
 
 
 
@@ -54,5 +54,57 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-for _ in range(inp()):
-    
+
+n,k = invr()
+both, al, bob = [],[],[]
+c = 0
+for __ in range(n):
+    t, a ,b = invr()
+
+    if a == b == 1:
+        both.append(t)
+    elif a == 1:
+        al.append(t)
+    else:
+        bob.append(t)
+
+f = True
+
+both.sort()
+al.sort()
+bob.sort()
+
+blen = len(both)
+allen = len(al)
+boblen = len(bob)
+
+i = 0
+while i < k:
+    if blen == 0 and (boblen == 0 or allen == 0):
+        f = False
+        break
+
+    if blen == 0:
+        c += al.pop(0)
+        c += bob.pop(0)
+        boblen -= 1
+        allen -= 1
+    elif (boblen == 0 or allen == 0):
+        c += both.pop(0)
+        blen -= 1
+    else:
+        if both[0] <= al[0] + bob[0]:
+            c+= both.pop(0)
+            blen -= 1
+        else:
+            c += al.pop(0)
+            c += bob.pop(0)
+            boblen -= 1
+            allen -= 1
+
+    i += 1
+
+if f == True and i == k:
+    print c
+else:
+    print -1

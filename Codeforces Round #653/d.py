@@ -4,7 +4,7 @@ import sys
 input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
-from collections import Counter
+from collections import Counter, defaultdict
 
 
 
@@ -55,4 +55,24 @@ def binomial(n, k):
         return div 
 
 for _ in range(inp()):
-    
+    n,k=invr()
+    arr = invr()
+
+    d=defaultdict(int)
+
+    for a in arr:
+        d[(k-a)%k] += 1
+
+    d[0] = 0
+
+    mx_val = max(d.values())
+
+    if mx_val == 0:
+        print 0
+        continue
+
+    ind = max([a[0] for a in d.items() if a[1] == mx_val])
+
+    print (mx_val-1)*k + ind + 1
+
+

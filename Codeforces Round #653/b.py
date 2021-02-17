@@ -7,7 +7,6 @@ from math import sqrt, floor, ceil
 from collections import Counter
 
 
-
 ############ ---- Input Functions ---- ############
 def inp():
     return(int(input()))
@@ -54,5 +53,24 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
+
 for _ in range(inp()):
-    
+    n = inp()
+    c = 0
+    f = True
+
+    while n > 1:
+        if n%6 == 0:
+            n //= 6
+            c +=1
+        else:
+            if n % 3 != 0:
+                print -1
+                f = False
+                break
+            else:
+                n *= 2
+                c += 1
+
+    if f:
+        print c

@@ -56,5 +56,18 @@ def binomial(n, k):
 
 for _ in range(inp()):
     x = inp()
-    r = (x/2)**(1./3.)
-    print r
+    f = False
+
+    a = 1
+    while a**3 < x and not f:
+        b = round((x - a**3)**(1./3.))
+
+        if int(b)**3 + a**3 == x and b>0:
+            print 'YES'
+            f = True
+
+        a+=1
+
+    if not f:
+        print 'NO'
+        

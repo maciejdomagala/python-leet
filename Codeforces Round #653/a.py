@@ -5,7 +5,7 @@ input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
 from collections import Counter
-
+from copy import deepcopy as dc
 
 
 ############ ---- Input Functions ---- ############
@@ -55,4 +55,11 @@ def binomial(n, k):
         return div 
 
 for _ in range(inp()):
-    
+    x,y,n = invr()
+    f = False
+
+    r = n %x 
+    if r <y:
+        print n-x+y-r
+    else:
+        print n-r+y

@@ -57,25 +57,23 @@ def binomial(n, k):
 for _ in range(inp()):
     n = inp()
     arr = invr()
-    count=0
     c0,c1,c2 = 0,0,0
+    count=0
     for a in arr:
-        if a % 3 == 0:
-            c0+=1
-        elif a % 3 == 1:
+        if a%3==0:
+            c0 += 1
+        elif a%3==1:
             c1 += 1
         else:
-            c2 += 1
+            c2+=1
 
-    mx = max(c0,c1,c2)
-    if c0 == mx:
-        count += n//3-c1
-        count+= 2*(n//3-c2)
-    elif c1 == mx:
-        count += n//3-c2
-        count+= 2*(n//3-c0)    
-    else:
-        count += n//3-c0
-        count+= 2*(n//3-c1)
+    arr2 = [c0,c1,c2]
+    med = n//3
+
+    for i in range(6):
+        if arr2[i%3] > med:
+            count += (arr2[i%3] - med)
+            arr2[(i+1)%3] += (arr2[i%3] - med)
+            arr2[i%3] -= (arr2[i%3] - med)
 
     print count

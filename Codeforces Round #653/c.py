@@ -55,4 +55,17 @@ def binomial(n, k):
         return div 
 
 for _ in range(inp()):
-    
+    n=inp()
+    s = raw_input()
+    c=0
+    count = 0
+    for a in s:
+        if a == '(':
+            c += 1
+        if a == ')':
+            c -= 1
+            if c < 0:
+                count +=1
+                c = 0
+
+    print count
