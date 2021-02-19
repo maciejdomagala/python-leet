@@ -59,27 +59,19 @@ for _ in range(inp()):
     n = inp()
     xs = []
     ys = []
-    c=0
-    pairs = []
     for _ in range(n):
         x, y = invr()
         xs.append(x)
         ys.append(y)
 
-    if len(set(xs)) == 1 and (set(xs) == set(ys)):
+    if n%2 == 1:
         print 1
         continue
-    if len(set(xs)) == 1:
-        print max(ys)-min(ys)+1
-        continue
-    elif len(set(ys)) == 1:
-        print max(xs)-min(xs)+1
-        continue
 
-    if n%2 == 0:
-        mid_x = [xs[int(n//2)],xs[int(n//2)-1]]
-        mid_y = [ys[int(n//2)],ys[int(n//2)-1]]
-        print len(set(mid_x))*len(set(mid_y))
-    else:
-        print 1
+    xs.sort()
+    ys.sort()
 
+    mid_x = xs[n//2] - xs[n//2 - 1] +1
+    mid_y = ys[n//2] - ys[n//2 - 1] +1
+
+    print mid_x*mid_y

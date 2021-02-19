@@ -6,7 +6,6 @@ import math
 from math import sqrt, floor, ceil
 from collections import Counter
 from copy import deepcopy as dc
-# from statistics import median, mean
 
 
 ############ ---- Input Functions ---- ############
@@ -22,17 +21,6 @@ def invr():
 def insr2():
     s = input()
     return(s.split(" "))
-
-def sieve_for_primes_to(n):
-    size = n//2
-    sieve = [1]*size
-    limit = int(n**0.5)
-    for i in range(1,limit):
-        if sieve[i]:
-            val = 2*i+1
-            tmp = ((size-1) - i)//val 
-            sieve[i+val::val] = [0]*tmp
-    return [2] + [i*2+1 for i, v in enumerate(sieve) if v and i>0]
 
 def prime_factorization(n):
 
@@ -66,5 +54,24 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-
 for _ in range(inp()):
+    n = inp()
+    arr = invr()
+
+    arr.sort()
+
+    num = arr[0]*arr[-1]
+
+    divs = []
+    for i in range(2, int(sqrt(num)+1)):
+        if num % i == 0:
+            divs.append(i)
+            divs.append(num//i)
+
+    if set(divs) == set(arr):
+        print num
+    else:
+        print -1
+
+    
+

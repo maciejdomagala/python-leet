@@ -66,5 +66,17 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
+n, l = invr()
 
-for _ in range(inp()):
+a = invr()
+
+a.sort()
+
+mx = 0
+for i in range(1,n):
+    if a[i]-a[i-1] > mx:
+        mx = a[i]-a[i-1]
+
+add = [a[0]-0, l-a[-1], mx/2]
+
+print max(add) 
