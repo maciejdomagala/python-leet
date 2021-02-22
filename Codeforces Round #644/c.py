@@ -58,37 +58,35 @@ for _ in range(inp()):
     n = inp()
 
     arr = invr()
-
     arr.sort()
 
-    odd,even=0,0
-
-    for i in range(n):
-        if arr[i]%2==0:
-            even+=1
-        else:
-            odd+=1
-    
-
-    if even%2 == 0 and odd%2 == 0:
-        print 'YES'
-        continue
-            
+    even, odd= 0,0
+    f = False
     for i in range(n-1):
-        if abs(arr[i]-arr[i+1]) == 1:
-            odd-=1
-            even-=1
-        
-    if odd == 0 and even%2 == 0:
+        if arr[i] % 2 == 0:
+            even += 1
+        else:
+            odd += 1
+
+        if arr[i]-arr[i+1] == -1:
+            f = True
+
+    if arr[-1] % 2 == 0:
+        even+=1
+    else:
+        odd+=1
+
+    if even % 2 == 0 and odd % 2 == 0:
         print 'YES'
         continue
-    elif even == 0 and odd%2 == 0:
-        print 'YES'
+    elif (even % 2) != (odd % 2):
+        print 'NO'
         continue
-    elif odd%2 == 0 and even%2 == 0:
+    
+    if f == True:
         print 'YES'
-        continue
     else:
         print 'NO'
+
 
     
