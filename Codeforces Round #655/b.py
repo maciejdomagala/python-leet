@@ -57,22 +57,13 @@ def binomial(n, k):
 
 for _ in range(inp()):
     n = inp()
-    arr=invr()
-    ans=[]
+    ans= []
 
-    cur = n
+    p  =prime_factorization(n)
 
-    a = [(a, i) for i, a in enumerate(arr)]
-    a.sort(reverse=True)
-
-    for num, i in a:
-        if i <= cur:
-            ans += arr[i:cur]
-            cur = i
+    print p
 
     print ' '.join([str(a) for a in ans])
-
-
 
 
 

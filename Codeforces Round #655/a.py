@@ -6,7 +6,6 @@ import math
 from math import sqrt, floor, ceil
 from collections import Counter
 from copy import deepcopy as dc
-# from statistics import median, mean
 
 
 ############ ---- Input Functions ---- ############
@@ -57,23 +56,7 @@ def binomial(n, k):
 
 for _ in range(inp()):
     n = inp()
-    arr=invr()
-    ans=[]
 
-    cur = n
-
-    a = [(a, i) for i, a in enumerate(arr)]
-    a.sort(reverse=True)
-
-    for num, i in a:
-        if i <= cur:
-            ans += arr[i:cur]
-            cur = i
+    ans = [n]*n
 
     print ' '.join([str(a) for a in ans])
-
-
-
-
-
-
