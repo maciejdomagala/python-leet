@@ -53,17 +53,33 @@ def binomial(n, k):
         b = math.factorial(k)
         c = math.factorial(n-k)
         div = a // (b * c)
-        return div 
+        return div
+
+def small_divisor(n):
+
+    if n % 2 == 0:
+        return 2
+
+    i = 3
+    while i*i <= n:
+        if n%i == 0:
+            return i
+        i += 2
+
+    return n 
 
 for _ in range(inp()):
     n = inp()
     ans= []
 
-    p  =prime_factorization(n)
+    s = small_divisor(n)
+    ans = n//s
 
-    print p
+    if s == n:
+        print n-1, 1
+    else:
+        print ans, n-ans
 
-    print ' '.join([str(a) for a in ans])
 
 
 
