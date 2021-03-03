@@ -5,6 +5,8 @@ input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
 from collections import Counter
+from copy import deepcopy as dc
+# from statistics import median, mean
 
 
 ############ ---- Input Functions ---- ############
@@ -51,12 +53,21 @@ def binomial(n, k):
         b = math.factorial(k)
         c = math.factorial(n-k)
         div = a // (b * c)
-        return div  
+        return div 
 
-for _ in range(inp()):
-    n = inp()
-    
-    s = '989' + '0123456789' * (((n-3)//10)+1)
+n, k = invr()
 
-    print s[:n]
+def f(x):
 
+    s = str(x)
+
+    g1 = int(''.join([a for a in sorted(s, reverse=True)]))
+    g2 = int(''.join([a for a in sorted(s)]))
+
+    return g1-g2
+
+
+for a in range(k):
+    n = f(n)
+
+print n

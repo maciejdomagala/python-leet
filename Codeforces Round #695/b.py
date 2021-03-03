@@ -55,8 +55,21 @@ def binomial(n, k):
 
 for _ in range(inp()):
     n = inp()
-    
-    s = '989' + '0123456789' * (((n-3)//10)+1)
+    arr = invr()
+    if n < 3:
+        print 0
+        continue
 
-    print s[:n]
+    ans = 0
+    curr = 0
+    mx = 0
+
+    for i in range(1, n-1):
+        if arr[i-1] < arr[i] and arr[i+1] < arr[i]: #hill
+            ans += 1
+        elif arr[i-1] > arr[i] and arr[i+1] > arr[i]: #valley
+            ans += 1
+
+    for i 
+
 
