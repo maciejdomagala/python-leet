@@ -23,17 +23,6 @@ def insr2():
     s = input()
     return(s.split(" "))
 
-def sieve_for_primes_to(n):
-    size = n//2
-    sieve = [1]*size
-    limit = int(n**0.5)
-    for i in range(1,limit):
-        if sieve[i]:
-            val = 2*i+1
-            tmp = ((size-1) - i)//val 
-            sieve[i+val::val] = [0]*tmp
-    return [2] + [i*2+1 for i, v in enumerate(sieve) if v and i>0]
-
 def prime_factorization(n):
 
     if n == 1:
@@ -64,7 +53,7 @@ def binomial(n, k):
         b = math.factorial(k)
         c = math.factorial(n-k)
         div = a // (b * c)
-        return div 
+        return div
 
 def small_divisor(n):
 
@@ -79,5 +68,26 @@ def small_divisor(n):
 
     return n 
 
-
 for _ in range(inp()):
+    n = inp()
+    arr = invr()
+
+    b = 0
+    f = True
+
+    for i, a in enumerate(arr):
+        if a != i+1 and f:
+            f = False
+            b += 1
+        if a == i+1 and not f:
+            f = True
+            b += 1
+
+    if b == 0:
+        print 0
+    elif b <= 2:
+        print 1
+    else:
+        print 2
+
+

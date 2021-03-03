@@ -6,7 +6,6 @@ import math
 from math import sqrt, floor, ceil
 from collections import Counter
 from copy import deepcopy as dc
-# from statistics import median, mean
 
 
 ############ ---- Input Functions ---- ############
@@ -22,17 +21,6 @@ def invr():
 def insr2():
     s = input()
     return(s.split(" "))
-
-def sieve_for_primes_to(n):
-    size = n//2
-    sieve = [1]*size
-    limit = int(n**0.5)
-    for i in range(1,limit):
-        if sieve[i]:
-            val = 2*i+1
-            tmp = ((size-1) - i)//val 
-            sieve[i+val::val] = [0]*tmp
-    return [2] + [i*2+1 for i, v in enumerate(sieve) if v and i>0]
 
 def prime_factorization(n):
 
@@ -66,18 +54,55 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-def small_divisor(n):
-
-    if n % 2 == 0:
-        return 2
-
-    i = 3
-    while i*i <= n:
-        if n%i == 0:
-            return i
-        i += 2
-
-    return n 
-
-
 for _ in range(inp()):
+    s = insr()
+    a,b,c = 0,0,0
+    f = True
+    if s[0] == s[-1]:
+        print 'NO'
+        continue
+
+    d = {}
+    d['a'] = 0
+    d['b'] = 0
+    d['c'] = 0
+
+    for i in s:
+        if i == 'A':
+            d['a'] += 1
+        elif i == 'B':
+            d['b'] += 1
+        else:
+            d['c'] += 1
+
+    ans = ''
+
+    first = s[0]
+    last = s[-1]
+
+    count= 0
+
+    for i in s:
+        if i == first:
+            count += 1
+        elif i == last:
+            count -= 1
+        else:
+            if s.count(first) > s.count(last):
+                count -= 1
+            elif s.count(first) < s.count(last):
+                count += 1
+            else:
+                print 'NO'
+                f = False
+                break
+
+        if count < 0:
+            print 'NO'
+            f = False
+            break
+
+    if f == True and count != 0:
+        print 'NO'
+    elif f == True and count == 0:
+        print 'YES'
