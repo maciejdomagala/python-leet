@@ -15,12 +15,12 @@ def inp():
 def inlt():
     return(list(map(int,input().split())))
 def insr():
-    s = input()
+    s = raw_input()
     return(list(s[:len(s) - 1]))
 def invr():
     return(map(int,input().split()))
 def insr2():
-    s = input()
+    s = raw_input()
     return(s.split(" "))
 
 def sieve_for_primes_to(n):
@@ -83,31 +83,23 @@ def comb(x):
 
     return x*(x-1)//2
 
-n = inp()
-arr = invr()
-L, R = 0,0
+n, m = invr()
+d = {}
+ans = ''
+for _ in range(m):
+    a, b = insr2()
+    if len(a) <= len(b):
+        d[a] = a
+    else:
+        d[a] = b
 
-for i in range(1,n):
-    if arr[i] < arr[i-1]:
-        L = i-1
-        break
-else:
-    print 'yes'
-    print str(1) + " " + str(1)
-    sys.exit()
+i = insr2()
 
-for i in range(n-2, -1, -1):
-    if arr[i] > arr[i+1]:
-        R = i+1
-        break
+for a in i:
+    ans += d[a] + ' '
 
-ans = arr[:L] + arr[L:R+1][::-1] + arr[R+1:]
+print ans.strip()
 
-if ans == sorted(arr):
-    print 'yes'
-    print str(L+1) + " " + str(R+1)
-else:
-    print 'no'
 
 
 
