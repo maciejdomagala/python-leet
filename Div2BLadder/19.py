@@ -85,34 +85,9 @@ def comb(x):
 
     return x*(x-1)//2
 
-s = insr()
-t = insr()
+for _ in range(inp()):
+    c = 0
+    r,g,b,w = invr()
+    arr = [r,g,b,w]
 
-cs = Counter(s)
-ct = Counter(t)
-
-for a in t:
-    if a not in cs.keys():
-        print "need tree"
-        sys.exit()
-    else:
-        if ct[a] > cs[a]:
-            print "need tree"
-            sys.exit()
-
-cur = t[0]
-ind = 0
-
-for a in s:
-    if a == cur:
-        ind += 1
-        if ind > len(t)-1:
-            print "automaton"
-            sys.exit()
-        else:
-            cur = t[ind]
-else:
-    if cs == ct:
-        print "array"
-    else:
-        print "both"
+    

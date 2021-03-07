@@ -8,8 +8,6 @@ from collections import Counter
 from copy import deepcopy as dc
 # from statistics import median, mean
 
-from string import ascii_lowercase as alphabet
-
 
 ############ ---- Input Functions ---- ############
 def inp():
@@ -22,19 +20,8 @@ def insr():
 def invr():
     return(map(int,input().split()))
 def insr2():
-    s = raw_input()
+    s = input()
     return(s.split(" "))
-
-def sieve_for_primes_to(n):
-    size = n//2
-    sieve = [1]*size
-    limit = int(n**0.5)
-    for i in range(1,limit):
-        if sieve[i]:
-            val = 2*i+1
-            tmp = ((size-1) - i)//val 
-            sieve[i+val::val] = [0]*tmp
-    return [2] + [i*2+1 for i, v in enumerate(sieve) if v and i>0]
 
 def prime_factorization(n):
 
@@ -68,51 +55,57 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-def small_divisor(n):
 
-    if n % 2 == 0:
-        return 2
+arr = [-1]*10
+arr[0] = 0
+arr[1] = 1
+arr[2] = 5
+arr[5] = 2
+arr[8] = 8
 
-    i = 3
-    while i*i <= n:
-        if n%i == 0:
-            return i
-        i += 2
 
-    return n 
+def check_time(time, arr=arr):
 
-def comb(x):
-
-    return x*(x-1)//2
-
-s = insr()
-t = insr()
-
-cs = Counter(s)
-ct = Counter(t)
-
-for a in t:
-    if a not in cs.keys():
-        print "need tree"
-        sys.exit()
+    for i in time:
+        if arr[int(i)] == -1:
+            return -1
     else:
-        if ct[a] > cs[a]:
-            print "need tree"
-            sys.exit()
+        hour = str(arr[int(time[3])]) + str(arr[int(time[2])])
+        minute = str(arr[int(time[1])]) + str(arr[int(time[0])])
+        return (hour, minute)
 
-cur = t[0]
-ind = 0
 
-for a in s:
-    if a == cur:
-        ind += 1
-        if ind > len(t)-1:
-            print "automaton"
-            sys.exit()
+
+for _ in range(inp()):
+
+    h, m = invr()
+    f = False
+
+    s = insr()
+
+    time = s[0]+s[1]+s[3]+s[4]
+
+    while str(time) != '9999':
+        time = str(time)
+        if len(time) < 4:
+            time = '0'*(4-len(time)) + time
+        if check_time(time) == -1:
+            time = int(time) + 1
         else:
-            cur = t[ind]
-else:
-    if cs == ct:
-        print "array"
-    else:
-        print "both"
+            if int(check_time(time)[0]) < h and int(check_time(time)[1]) < m:
+                if int(time[:2]) < h and int(time[2:4]) < m:
+                    print time[:2]+ ":" + time[2:4]
+                    f = True
+                    break
+                else:
+                    time = int(time) + 1
+            else:
+                time = int(time) + 1
+
+    if f == False:
+        print '00:00'
+
+
+
+
+
