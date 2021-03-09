@@ -8,8 +8,6 @@ from collections import Counter
 from copy import deepcopy as dc
 # from statistics import median, mean
 
-from string import ascii_lowercase as alphabet
-
 
 ############ ---- Input Functions ---- ############
 def inp():
@@ -22,7 +20,7 @@ def insr():
 def invr():
     return(map(int,input().split()))
 def insr2():
-    s = raw_input()
+    s = input()
     return(s.split(" "))
 
 def sieve_for_primes_to(n):
@@ -79,9 +77,32 @@ def small_divisor(n):
             return i
         i += 2
 
-    return n 
+    return n
 
-def comb(x):
+def solve(l, r ,d):
+    if l >= r:
+        return
 
-    return x*(x-1)//2
+    mx, ind = -1,-1
+    for i in range(l, r):
+        if arr[i] > mx:
+            mx = arr[i]
+            ind = i
+
+    ans[ind] = d
+    d += 1
+    solve(l, ind, d)
+    solve(ind+1, r, d)
+
+for _ in range(inp()):
+    n = inp()
+    arr = invr()
+    ans = [-1]*n
+
+    l, r = 0, n
+    d = 0
+
+    solve(l,r,d)
+
+    print ' '.join([str(a) for a in ans])
 

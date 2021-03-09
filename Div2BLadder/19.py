@@ -90,4 +90,5 @@ for _ in range(inp()):
     r,g,b,w = invr()
     arr = [r,g,b,w]
 
-    
+    if w == 0:
+        
