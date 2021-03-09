@@ -79,25 +79,32 @@ def small_divisor(n):
 
     return n
 
-for _ in range(inp()):
-    s = raw_input()
-    c= 0
-    cur = 1
-    if len(s) == 1:
+n = inp()
+arr = invr()
+
+if n == 1:
+    if arr[0] == 1:
         print 0
-        continue
+        sys.exit()
+    else:
+        print 1
+        sys.exit()
 
-    for i in range(1, len(s)):
-        if s[i] == s[i-1]:
-            cur += 1
-            if cur == 3:
-                c += 2
-                cur = 0
-        else:
-            if cur == 2:
-                c += 1
+cur, mx = 0,0
+ones = 0
 
+for i in range(n):
+    if arr[i] == 0:
+        cur += 1
+        if mx < cur:
+            mx = cur
+    else:
+        ones += 1
+        cur -= 1
+        if cur < 0:
+            cur = 0
 
-    print c
-
-        
+if mx == 0:
+    print n-1
+else:
+    print ones+mx
