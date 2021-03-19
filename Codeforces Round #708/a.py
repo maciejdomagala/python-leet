@@ -60,12 +60,24 @@ for _ in range(inp()):
     arr= invr()
 
     arr.sort()
+
+    cur = 0
+    ans = []
     rest = []
+    rest2 = []
+    ind = n
 
     for i, a in enumerate(arr):
-        if a != i:
-            if a == (i-1):
-                rest.append(arr.pop(i))
+        if a == cur:
+            ans.append(a)
+            cur += 1
+        elif a == cur-1:
+            rest.append(a)
+        else:
+            rest2 = arr[i:]
+            break
 
-    print ' '.join([str(a) for a in arr+rest])
-        
+    out = ans + rest + rest2
+    print ' '.join([str(a) for a in out])
+
+

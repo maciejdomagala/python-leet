@@ -6,6 +6,7 @@ import math
 from math import sqrt, floor, ceil
 from collections import Counter
 from copy import deepcopy as dc
+# from statistics import median, mean
 
 
 ############ ---- Input Functions ---- ############
@@ -52,58 +53,36 @@ def binomial(n, k):
         b = math.factorial(k)
         c = math.factorial(n-k)
         div = a // (b * c)
-        return div 
+        return div
+
+def small_divisor(n):
+
+    if n % 2 == 0:
+        return 2
+
+    i = 3
+    while i*i <= n:
+        if n%i == 0:
+            return i
+        i += 2
+
+    return n 
+
+
 
 for _ in range(inp()):
-    s = insr()
-    a,b,c = 0,0,0
-    f = True
-    if s[0] == s[-1]:
-        print 'NO'
-        continue
+    n = inp()
+    arr = invr()
 
-    d = {}
-    d['a'] = 0
-    d['b'] = 0
-    d['c'] = 0
+    arr.sort()
 
-    for i in s:
-        if i == 'A':
-            d['a'] += 1
-        elif i == 'B':
-            d['b'] += 1
-        else:
-            d['c'] += 1
+    inf = 10**9
+    dp = [[inf]*(2*n+1) for _ in range(2*n+1)]
+    dp[-1] = [0]*(2*n+1)
 
-    ans = ''
+    for i in range(n):
+        for time in range(1, 2*n+1):
+            dp[i][time] = min(dp[i][time-1], dp[i-1][time-1] + abs(time-arr[i]))
 
-    first = s[0]
-    last = s[-1]
 
-    count= 0
-
-    for i in s:
-        if i == first:
-            count += 1
-        elif i == last:
-            count -= 1
-        else:
-            if s.count(first) > s.count(last):
-                ,
-                count -= 1
-            elif s.count(first) < s.count(last):
-                count += 1
-            else:
-                print 'NO'
-                f = False
-                break
-
-        if count < 0:
-            print 'NO'
-            f = False
-            break
-
-    if f == True and count != 0:
-        print 'NO'
-    elif f == True and count == 0:
-        print 'YES'
+    print min(dp[n-1])

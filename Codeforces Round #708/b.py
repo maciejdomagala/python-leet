@@ -58,25 +58,12 @@ def binomial(n, k):
 for _ in range(inp()):
 
     temp = defaultdict(int)
-    c = 0
-
     n, m = invr()
     arr = invr()
-    ans = 0
 
-    for a in arr:
-        temp[a%m] += 1
-
-    for i in range(1, int(ceil((m//2)))):
-        mx, mn = max(temp[i], temp[m-i]), min(temp[i], temp[m-i])
-        ans += max(1, mx-mn)
     
 
-    if temp[0] > 0:
-        ans += 1
-    if n%2 == 0:
-        if temp[m//2] > 0:
-            ans += 1
+
 
     print ans
 
