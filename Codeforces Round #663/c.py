@@ -6,6 +6,7 @@ import math
 from math import sqrt, floor, ceil
 from collections import Counter
 from copy import deepcopy as dc
+from math import factorial
 # from statistics import median, mean
 
 
@@ -55,37 +56,11 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
+mod = 10**9 + 7
+n = inp()
+ans = 1
+for i in range(1,n+1):
+    ans *= i
+    ans %= mod
 
-arr = [-1]*10
-arr[0] = 0
-arr[1] = 1
-arr[2] = 5
-arr[5] = 2
-arr[8] = 8
-
-
-def check_time(time, arr=arr):
-
-    for i in time:
-        if arr[int(i)] == -1:
-            return -1
-    else:
-        hour = str(arr[int(time[3])]) + str(arr[int(time[2])])
-        minute = str(arr[int(time[1])]) + str(arr[int(time[0])])
-        return (hour, minute)
-
-
-for _ in range(inp()):
-    n,m = invr()
-    count = 0
-
-    for i in range(n):
-        arr = insr()
-        if i == n-1:
-            count += arr.count('D')
-        elif arr[-1] == 'R':
-            count += 1
-
-    print count
-
-
+print (ans - 2**(n-1)) % mod

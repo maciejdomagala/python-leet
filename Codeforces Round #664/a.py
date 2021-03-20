@@ -54,20 +54,18 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
+
+
 for _ in range(inp()):
-    n, k = invr()
-
+    n = inp()
+    mid = n//2 + 1
     ans = []
+    for i in range(int(ceil(n//2))+1):
+        # ans.append(i+1)
+        ans.append(mid+i)
+        ans.append(i+1)
 
-    div = int(ceil(k / 2)
-    for i in range(div, k):
-        ans.append(i)
-    
-    if n != k:
-        for i in range(k+1, n+1):
-            ans.append(i)
-
-    print len(ans)
-    print ' '.join([str(a) for a in ans])
-
-
+    if n % 2 == 1:
+        print ' '.join([str(a) for a in ans[:-1]])
+    else:
+        print ' '.join([str(a) for a in ans[:-2]])
