@@ -2,12 +2,10 @@
 from __future__ import division
 import sys
 input = sys.stdin.readline
-from sys import stdout
 import math
 from math import sqrt, floor, ceil
-from collections import Counter
+from collections import Counter, defaultdict
 from copy import deepcopy as dc
-from bisect import bisect
 # from statistics import median, mean
 
 
@@ -24,22 +22,6 @@ def invr():
 def insr2():
     s = input()
     return(s.split(" "))
-
-def rwh_primes1(n):
-    sieve = [True] * (n//2)
-    for i in xrange(3,int(n**0.5)+1,2):
-        if sieve[i//2]:
-            sieve[i*i//2::i] = [False] * ((n-i*i-1)//(2*i)+1)
-    return [2] + [2*i+1 for i in xrange(1,n//2) if sieve[i]]
-
-def sieve(n):
-    arr=[1]*(n+1)
-    arr[1]=0
-    for i in range(2,int(math.sqrt(n+1))+4):
-        if arr[i]==1:
-            for j in range(2*i,n+1,i):
-                arr[j]=0
-    return arr
 
 def prime_factorization(n):
 
@@ -73,42 +55,39 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-def binary_search(a,x,lo=0,hi=-1):
-    i = bisect(a,x,lo,hi)
-    if i == 0:
-        return -1
-    elif a[i-1] == x:
-        return i-1
-    else:
-        return -1
+for _ in range(inp()):
+    n = inp()
+    arr = invr()
+    ans = 0
+
+    ca= Counter(arr)
+
+    zz = ca.most_common()
+
+    mx = 0 #number of max occurencies
+    rest = 0 #number of rest of the values
+    for a,b in zz:
+        if b == zz[0][1]:
+            mx += 1
+        else:
+            rest += b
+
+    """
+    4
+    7
+    1 7 1 6 4 4 6
+    """
 
 
-n = inp()
-arr = invr()
-m = inp()
-queries = invr()
+    #when we have number of max values, we are grouping them together
+    #and the answer will be the min number of rest of numbers divided slots between (mx-1) 
 
-pre = [0]*n
-d = {}
+    groups = zz[0][1]-1
+    ans = rest//groups
 
-last = 0
+    #and if the number of max numbers is greater than 1, we need to include the additional space
 
-i = 0
-ind = 0
-curr = arr[ind]
-while True:
-    if i <= curr:
-        d[i] = ind
-    else:
-        ind += 1
-        if ind >= len(arr):
-            break
-        curr += arr[ind]
-        d[i] = ind
-    i += 1
-
-
-for i in range(m):
-    print d[queries[i]]+1
-
+    ans += (mx-1)
+    
+    print ans
 

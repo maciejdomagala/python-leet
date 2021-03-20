@@ -2,13 +2,10 @@
 from __future__ import division
 import sys
 input = sys.stdin.readline
-from sys import stdout
 import math
 from math import sqrt, floor, ceil
 from collections import Counter
 from copy import deepcopy as dc
-from bisect import bisect
-# from statistics import median, mean
 
 
 ############ ---- Input Functions ---- ############
@@ -24,22 +21,6 @@ def invr():
 def insr2():
     s = input()
     return(s.split(" "))
-
-def rwh_primes1(n):
-    sieve = [True] * (n//2)
-    for i in xrange(3,int(n**0.5)+1,2):
-        if sieve[i//2]:
-            sieve[i*i//2::i] = [False] * ((n-i*i-1)//(2*i)+1)
-    return [2] + [2*i+1 for i in xrange(1,n//2) if sieve[i]]
-
-def sieve(n):
-    arr=[1]*(n+1)
-    arr[1]=0
-    for i in range(2,int(math.sqrt(n+1))+4):
-        if arr[i]==1:
-            for j in range(2*i,n+1,i):
-                arr[j]=0
-    return arr
 
 def prime_factorization(n):
 
@@ -73,42 +54,6 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-def binary_search(a,x,lo=0,hi=-1):
-    i = bisect(a,x,lo,hi)
-    if i == 0:
-        return -1
-    elif a[i-1] == x:
-        return i-1
-    else:
-        return -1
-
-
-n = inp()
-arr = invr()
-m = inp()
-queries = invr()
-
-pre = [0]*n
-d = {}
-
-last = 0
-
-i = 0
-ind = 0
-curr = arr[ind]
-while True:
-    if i <= curr:
-        d[i] = ind
-    else:
-        ind += 1
-        if ind >= len(arr):
-            break
-        curr += arr[ind]
-        d[i] = ind
-    i += 1
-
-
-for i in range(m):
-    print d[queries[i]]+1
-
-
+for _ in range(inp()):
+    n = inp()
+    print n//2 + 1

@@ -2,12 +2,12 @@
 from __future__ import division
 import sys
 input = sys.stdin.readline
-from sys import stdout
 import math
 from math import sqrt, floor, ceil
-from collections import Counter
+from collections import Counter, defaultdict
 from copy import deepcopy as dc
-from bisect import bisect
+# import numpy as np
+# from operator import itemgetter 
 # from statistics import median, mean
 
 
@@ -24,22 +24,6 @@ def invr():
 def insr2():
     s = input()
     return(s.split(" "))
-
-def rwh_primes1(n):
-    sieve = [True] * (n//2)
-    for i in xrange(3,int(n**0.5)+1,2):
-        if sieve[i//2]:
-            sieve[i*i//2::i] = [False] * ((n-i*i-1)//(2*i)+1)
-    return [2] + [2*i+1 for i in xrange(1,n//2) if sieve[i]]
-
-def sieve(n):
-    arr=[1]*(n+1)
-    arr[1]=0
-    for i in range(2,int(math.sqrt(n+1))+4):
-        if arr[i]==1:
-            for j in range(2*i,n+1,i):
-                arr[j]=0
-    return arr
 
 def prime_factorization(n):
 
@@ -73,42 +57,46 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-def binary_search(a,x,lo=0,hi=-1):
-    i = bisect(a,x,lo,hi)
-    if i == 0:
-        return -1
-    elif a[i-1] == x:
-        return i-1
-    else:
-        return -1
-
-
 n = inp()
 arr = invr()
-m = inp()
-queries = invr()
+q = inp()
 
-pre = [0]*n
-d = {}
+ca = Counter(arr)
+s, r =0,0
+for a in ca:
+    s += ca[a] // 4
+    if ca[a] % 4 > 1:
+        r += 1
 
-last = 0
+for _ in range(q):
+    query = raw_input()
+    sign = query[0]
+    value = int(query[2:])
+    
+    if sign == '+':
+        s -= ca[value] // 4
+        r -= ca[value] % 4 > 1
 
-i = 0
-ind = 0
-curr = arr[ind]
-while True:
-    if i <= curr:
-        d[i] = ind
+        ca[value] += 1
+
+        s += ca[value] // 4
+        r += (ca[value] % 4) > 1
+
+    if sign == '-':
+        s -= ca[value] // 4
+        r -= ca[value] % 4 > 1
+
+        ca[value] -= 1
+
+        s += ca[value] // 4
+        r += (ca[value] % 4) > 1
+
+    if s > 1:
+        print 'YES'
+    elif s < 1:
+        print 'NO'
     else:
-        ind += 1
-        if ind >= len(arr):
-            break
-        curr += arr[ind]
-        d[i] = ind
-    i += 1
-
-
-for i in range(m):
-    print d[queries[i]]+1
-
-
+        if r > 1:
+            print 'YES'
+        else:
+            print 'NO'

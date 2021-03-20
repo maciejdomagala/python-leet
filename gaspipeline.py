@@ -2,12 +2,10 @@
 from __future__ import division
 import sys
 input = sys.stdin.readline
-from sys import stdout
 import math
 from math import sqrt, floor, ceil
 from collections import Counter
 from copy import deepcopy as dc
-from bisect import bisect
 # from statistics import median, mean
 
 
@@ -24,22 +22,6 @@ def invr():
 def insr2():
     s = input()
     return(s.split(" "))
-
-def rwh_primes1(n):
-    sieve = [True] * (n//2)
-    for i in xrange(3,int(n**0.5)+1,2):
-        if sieve[i//2]:
-            sieve[i*i//2::i] = [False] * ((n-i*i-1)//(2*i)+1)
-    return [2] + [2*i+1 for i in xrange(1,n//2) if sieve[i]]
-
-def sieve(n):
-    arr=[1]*(n+1)
-    arr[1]=0
-    for i in range(2,int(math.sqrt(n+1))+4):
-        if arr[i]==1:
-            for j in range(2*i,n+1,i):
-                arr[j]=0
-    return arr
 
 def prime_factorization(n):
 
@@ -71,44 +53,41 @@ def binomial(n, k):
         b = math.factorial(k)
         c = math.factorial(n-k)
         div = a // (b * c)
-        return div 
+        return div
 
-def binary_search(a,x,lo=0,hi=-1):
-    i = bisect(a,x,lo,hi)
-    if i == 0:
-        return -1
-    elif a[i-1] == x:
-        return i-1
-    else:
-        return -1
+def small_divisor(n):
 
+    if n % 2 == 0:
+        return 2
 
-n = inp()
-arr = invr()
-m = inp()
-queries = invr()
+    i = 3
+    while i*i <= n:
+        if n%i == 0:
+            return i
+        i += 2
 
-pre = [0]*n
-d = {}
+    return n 
 
-last = 0
+for _ in range(inp()):
+    n, a, b = invr()
+    arr = insr()
+    inf = float('inf')
 
-i = 0
-ind = 0
-curr = arr[ind]
-while True:
-    if i <= curr:
-        d[i] = ind
-    else:
-        ind += 1
-        if ind >= len(arr):
-            break
-        curr += arr[ind]
-        d[i] = ind
-    i += 1
+    dp = [[inf]*2 for _ in range(n)]
 
+    dp[0][0] = b
+    dp[0][1] = inf
 
-for i in range(m):
-    print d[queries[i]]+1
+    for i in range(1, n):
+        if arr[i] == '1':
+            dp[i][1] = min(dp[i-1][0]+2*a+2*b, dp[i-1][1]+a+2*b)
+            dp[i][0] = inf
+        if arr[i] == '0':
+            if arr[i-1] == '0':
+                dp[i][1] = min(dp[i-1][1]+a +2*b, dp[i-1][0]+2*a+2*b)
+                dp[i][0] = min(dp[i-1][1]+2*a+b, dp[i-1][0]+a+b)
+            else:
+                dp[i][1] = min(dp[i-1][1]+a +2*b, dp[i-1][0]+2*a+2*b)
+                dp[i][0] = inf
 
-
+    print min(dp[n-1][1]+2*a+b, dp[n-1][0]+a+b)
