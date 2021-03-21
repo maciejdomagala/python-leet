@@ -53,7 +53,7 @@ def binomial(n, k):
         c = math.factorial(n-k)
         div = a // (b * c)
         return div 
-
+        
 for _ in range(inp()):
 
     a,b = invr()

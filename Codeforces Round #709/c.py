@@ -23,6 +23,9 @@ def insr2():
     s = input()
     return(s.split(" "))
 
+def r():
+    return raw_input()
+
 def prime_factorization(n):
 
     if n == 1:
@@ -55,33 +58,19 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
+a = r()
+
 for _ in range(inp()):
 
-    n, m = invr()
-    
     d = defaultdict(int)
-    ans = []
+
+    n, m = invr()
 
     for i in range(m):
         arr = invr()
         k = arr[0]
         arr = arr[1:]
-        ind = arr[0]
-        mn = inf
 
-        for i in range(k):
-            value = d[arr[i]]
-            if value < mn:
-                mn = value
-                ind = arr[i]
-
-        d[ind] += 1
-        ans.append(ind)
-        if d[ind] > int(ceil(m/2)):
-            print "NO"
-            break
-    else:
-        print 'YES'
-        print ' '.join([str(a) for a in ans])
-
-        
+        if k == 1:
+            d[arr[0]] += 1
+        else;

@@ -55,6 +55,8 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
+a = raw_input()
+
 for _ in range(inp()):
 
     n = inp()
