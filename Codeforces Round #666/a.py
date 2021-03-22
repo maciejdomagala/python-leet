@@ -4,11 +4,11 @@ import sys
 input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
-from collections import Counter, defaultdict
+from collections import Counter
 from copy import deepcopy as dc
-# from statistics import median, mean
+from collections import defaultdict
 
-inf = float('inf')
+
 ############ ---- Input Functions ---- ############
 def inp():
     return(int(input()))
@@ -22,9 +22,6 @@ def invr():
 def insr2():
     s = input()
     return(s.split(" "))
-
-def r():
-    return raw_input()
 
 def prime_factorization(n):
 
@@ -57,21 +54,26 @@ def binomial(n, k):
         c = math.factorial(n-k)
         div = a // (b * c)
         return div 
-
-a = r()
+        
+# a = raw_input()
 
 for _ in range(inp()):
 
+    n = inp()
+
     d = defaultdict(int)
+    f = True
 
-    n, m = invr()
+    for i in range(n):
+        s = insr()
+        for a in s:
+            d[a] += 1
 
-    for i in range(m):
-        arr = invr()
-        k = arr[0]
-        arr = arr[1:]
+    for a in d:
+        if d[a] % n != 0:
+            print 'NO'
+            f = False
+            break
 
-        if k == 1:
-            d[arr[0]] += 1
-        else:
-            
+    if f:
+        print 'YES'

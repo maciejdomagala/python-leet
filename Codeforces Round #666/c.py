@@ -8,7 +8,7 @@ from collections import Counter, defaultdict
 from copy import deepcopy as dc
 # from statistics import median, mean
 
-inf = float('inf')
+
 ############ ---- Input Functions ---- ############
 def inp():
     return(int(input()))
@@ -22,9 +22,6 @@ def invr():
 def insr2():
     s = input()
     return(s.split(" "))
-
-def r():
-    return raw_input()
 
 def prime_factorization(n):
 
@@ -58,20 +55,28 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-a = r()
+# a = raw_input()
 
-for _ in range(inp()):
+n = inp()
+arr = invr()
 
-    d = defaultdict(int)
-
-    n, m = invr()
-
-    for i in range(m):
-        arr = invr()
-        k = arr[0]
-        arr = arr[1:]
-
-        if k == 1:
-            d[arr[0]] += 1
-        else:
-            
+if n == 1:
+    print '1 1'
+    print '0'
+    print '1 1'
+    print '0'
+    print '1 1'
+    print -int(arr[0])
+else:
+    print '1 1'
+    print -int(arr[0])
+    print '1 ' + str(n)
+    ans = [0]
+    for i in range(1, n):
+        ans.append(-int(arr[i])*(n))
+    print ' '.join([str(a) for a in ans])
+    print '2 ' + str(n)
+    ans = []
+    for i in range(1, n):
+        ans.append(int(arr[i])*(n-1))
+    print ' '.join([str(a) for a in ans])
