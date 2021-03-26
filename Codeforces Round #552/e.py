@@ -4,7 +4,7 @@ import sys
 input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
-from collections import Counter
+from collections import Counter, deque
 from copy import deepcopy as dc
 
 
@@ -54,33 +54,28 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-#
+
 # r = raw_input()
-        
-for _ in range(inp()):
-    n, k = invr()
-    s = raw_input()
 
-    c = 0
-    arr = []
+n, k = invr()
+s = raw_input()
 
-    for i, a in enumerate(s):
-        if a == '*':
-            arr.append(i)
+d = [s]
+vis = {s}
 
-    if len(arr) == 1 or len(arr) == 2:
-        print len(arr)
-        continue
+cost = 0
+c = 0
 
-    i = 0
+while c < k and d:
+    cur = d.pop(0)
+    cost += n - len(cur)
+    c += 1
+    for i in range(len(cur)):
+        element = cur[:i] + cur[i+1:]
 
-    while i < len(arr)-1:
-        j = i+1
+        if element not in vis:
+            vis.add(element)
+            d.append(element)
 
-        while j < len(arr) and arr[j]-arr[i]<=k:
-            j += 1
 
-        c += 1
-        i = j-1
-
-    print c+1
+print -1 if c<k else cost

@@ -55,8 +55,24 @@ def binomial(n, k):
         return div 
 
 
-r = raw_input()
+# r = raw_input()
         
 for _ in range(inp()):
+
+    n,m,x = invr()
+
+    row = x % n
+    if row == 0:
+        row = n
+    
+
+    if x%n == 0:
+        col = (x//n)
+    else:
+        col = (x//n)+1
+
+    pos = (row-1)*m + col
+
+    print pos
 
     

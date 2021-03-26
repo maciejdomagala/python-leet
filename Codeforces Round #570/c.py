@@ -54,33 +54,24 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-#
+
 # r = raw_input()
         
 for _ in range(inp()):
-    n, k = invr()
-    s = raw_input()
 
-    c = 0
-    arr = []
+    k,n,a,b = invr()
 
-    for i, a in enumerate(s):
-        if a == '*':
-            arr.append(i)
-
-    if len(arr) == 1 or len(arr) == 2:
-        print len(arr)
+    if n*b >= k:
+        print -1
         continue
 
-    i = 0
+    diff = a-b
 
-    while i < len(arr)-1:
-        j = i+1
+    res = k-n*b
 
-        while j < len(arr) and arr[j]-arr[i]<=k:
-            j += 1
 
-        c += 1
-        i = j-1
+    turns = res//diff
+    if res % diff == 0:
+        turns -= 1
 
-    print c+1
+    print min(turns, n)

@@ -55,8 +55,24 @@ def binomial(n, k):
         return div 
 
 
-r = raw_input()
+# r = raw_input()
         
 for _ in range(inp()):
+    a = raw_input()
+    b = raw_input()
 
-    
+    dp = [[0]*(len(b)+1)]*(len(a)+1)
+
+    mx = 0
+
+    for i in range(len(a)):
+        for j in range(len(b)):
+            if a[i] == b[j]:
+                dp[i][j] = dp[i-1][j-1] + 1
+                if dp[i][j] > mx:
+                    mx = dp[i][j]
+            else:
+                dp[i][j] = 0
+
+
+    print mx
