@@ -56,22 +56,54 @@ def binomial(n, k):
 
 
 # r = raw_input()
-        
-for _ in range(inp()):
+n = inp()
+arr = invr()
+ans = []
 
-    n = inp()
-    arr = invr()
+i, j = 0, n-1
+mn = 0
+while i <= j:
+    a = arr[i]
+    b = arr[j]
 
-    ca = Counter(arr)
+    if mn >= max(a,b):
+        break
+    elif mn < min(a,b):
+        if a < b:
+            mn = a
+            ans.append('L')
+            i += 1
+        elif a > b:
+            mn = b
+            ans.append('R')
+            j -= 1
+        elif a == b:
+            c = 0
+            seq = j-i+1
+            k = i
+            while k < j:
+                if arr[k] > arr[k+1]:
+                    break
+                else:
+                    c += 1
+                    k += 1
+            if c <= seq/2:
+                mn = b
+                ans.append('R')
+                j -= 1
+            else:
+                mn = a
+                ans.append('L')
+                i += 1
+    else:
+        if a > mn:
+            mn = a
+            ans.append('L')
+            i += 1
+        else:
+            mn = b
+            ans.append('R')
+            j -= 1
 
-    s = 0
-    prev = n+1
-    
-    for _, e in ca.most_common():
-        this = min(e, prev-1)
-        if this == 0:
-            break
-        s += this
-        prev = this
-
-    print s
+print len(ans)
+print ''.join(ans)
