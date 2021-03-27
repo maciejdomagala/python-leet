@@ -4,7 +4,7 @@ import sys
 input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
-from collections import Counter, deque, defaultdict
+from collections import Counter
 from copy import deepcopy as dc
 
 
@@ -56,24 +56,11 @@ def binomial(n, k):
 
 
 # r = raw_input()
-
-n, k = invr()
-arr = invr()
-
-mx = n
-
-d = defaultdict(int)
-d2 = defaultdict(int)
-
-for i, a in enumerate(arr):
-    d[a] = i
-    if a == n:
-        ind_start = i
-
-# left_students = {i:i for i in range(1, n+1)}
-
-c,w = 0,0
-ans = [0]*n
-
-
         
+s = raw_input()
+ans = 9
+
+for a in s[1:]:
+    ans += 9-int(a)
+
+print ans+1 if int(s) > 9 else ans
