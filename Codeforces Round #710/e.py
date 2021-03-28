@@ -4,7 +4,7 @@ import sys
 input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
-from collections import Counter
+from collections import Counter, deque
 from copy import deepcopy as dc
 
 
@@ -56,23 +56,42 @@ def binomial(n, k):
 
 
 # r = raw_input()
-        
+
 for _ in range(inp()):
-    a = raw_input()
-    b = raw_input()
+    n = inp()
+    arr = invr()
 
-    dp = [[0]*(len(b)+1) for i in range(len(a)+1)]
+    ans_small = [0]*n
+    ans_big = [0]*n
 
-    mx = 0
+    ans_small[0] = arr[0]
+    ans_big[0] = arr[0]
 
-    for i in range(len(a)):
-        for j in range(len(b)):
-            if a[i] == b[j]:
-                dp[i][j] = dp[i-1][j-1] + 1
-                if dp[i][j] > mx:
-                    mx = dp[i][j]
-            else:
-                dp[i][j] = 0
+    small, big = deque([]), deque([])
+
+    for i in range(1, arr[0]):
+        small.append(i)
+        big.append(i)
+
+    cur = arr[0]
+
+    for i in range(1, n):
+        if arr[i] != arr[i-1]:
+            ans_small[i] = arr[i]
+            ans_big[i] = arr[i]
+
+            for i in range(cur+1, arr[i]):
+                small.append(i)
+                big.append(i)
+
+            cur = arr[i]
+
+        else:
+            ans_small[i] = small.popleft()
+            ans_big[i] = big.pop()
+
+    print ' '.join([str(a) for a in ans_small])
+    print ' '.join([str(a) for a in ans_big])
 
 
-    print len(a)-mx + len(b)-mx
+

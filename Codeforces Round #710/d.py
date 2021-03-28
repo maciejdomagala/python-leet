@@ -55,24 +55,24 @@ def binomial(n, k):
         return div 
 
 
-# r = raw_input()
-        
+r = raw_input()
+
 for _ in range(inp()):
-    a = raw_input()
-    b = raw_input()
+    n = inp()
+    arr = invr()
 
-    dp = [[0]*(len(b)+1) for i in range(len(a)+1)]
+    ca = Counter(arr)
 
-    mx = 0
+    s = sum([a[1] for a in ca.most_common()])
 
-    for i in range(len(a)):
-        for j in range(len(b)):
-            if a[i] == b[j]:
-                dp[i][j] = dp[i-1][j-1] + 1
-                if dp[i][j] > mx:
-                    mx = dp[i][j]
-            else:
-                dp[i][j] = 0
+    big = ca.most_common(1)[0][1]
 
+    s -= big
 
-    print len(a)-mx + len(b)-mx
+    if big-s > 0:
+        print big-s
+    else:
+        if n % 2 == 0:
+            print 0
+        else:
+            print 1
