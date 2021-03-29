@@ -7,6 +7,8 @@ from math import sqrt, floor, ceil
 from collections import Counter, deque, defaultdict
 from copy import deepcopy as dc
 
+sys.setrecursionlimit(10**10)
+
 
 ############ ---- Input Functions ---- ############
 def inp():
@@ -57,26 +59,20 @@ def binomial(n, k):
 #
 r = raw_input()
 
-dp = [[0]*1000 for _ in range(1000)]
+def f(n, k, start):
 
-for i in range(1000):
-    dp[i][1] = 1
-    dp[1][i] = 2
+    if n == 0:
+        return 1
+    
+    if k == 1:
+        return 1
 
-for n in range(2, 1000):
-    for k in range(2, 1000):
-        dp[n][k] = sum([dp[i][k-1] for i in range(n)])
+    return f(n-1, k, start) + f(start-n+1, k-1, start)
 
 
 for _ in range(inp()):
 
     n, k = invr()
+    start = n
 
-    print dp[n][k]
-
-
-
-
-
-
-
+    print f(n, k, start)
