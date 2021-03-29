@@ -55,36 +55,43 @@ def binomial(n, k):
         return div 
 
 
-r = raw_input()
+# r = raw_input()
 
-n = inp()
-a = invr()
+for _ in range(inp()):
+    n = inp()
+    arr = invr()
 
-dp = [[0,0] for _ in range(n)]
-dp[0][0] = 1
-dp[0][1] = 0
-dp[1][0] = 1
-dp[1][1] = 1
+    ans_small = [0]*n
+    ans_big = [0]*n
 
-if a[1] > a[0]:
-    dp[1][0] = 2
+    ans_small[0] = arr[0]
+    ans_big[0] = arr[0]
 
-for i in range(2, n):
+    small, big = deque([]), deque([])
 
-    if a[i] > a[i-1]:
-        dp[i][0] = dp[i-1][0]
-    else:
-        dp[i][0] = 1
+    for i in range(1, arr[0]):
+        small.append(i)
+        big.append(i)
 
-    if a[i] <= a[i-1]:
-        if a[i] > a[i-2]:
-            dp[i][1] = max(dp[i-2][0]+1, dp[i-1][1] + 1)
+    cur = arr[0]
+
+    for i in range(1, n):
+        if arr[i] != arr[i-1]:
+            ans_small[i] = arr[i]
+            ans_big[i] = arr[i]
+
+            for i in range(cur+1, arr[i]):
+                small.append(i)
+                big.append(i)
+
+            cur = arr[i]
+
         else:
-            dp[i][1] = dp[i-1][1] + 1
-    else:
-        dp[i][1] = 1
+            ans_small[i] = small.popleft()
+            ans_big[i] = big.pop()
 
-print dp
+    print ' '.join([str(a) for a in ans_small])
+    print ' '.join([str(a) for a in ans_big])
 
 
 

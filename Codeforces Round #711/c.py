@@ -4,7 +4,7 @@ import sys
 input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
-from collections import Counter, deque
+from collections import Counter, deque, defaultdict
 from copy import deepcopy as dc
 
 
@@ -54,37 +54,29 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-
+#
 r = raw_input()
 
-n = inp()
-a = invr()
+dp = [[0]*1000 for _ in range(1000)]
 
-dp = [[0,0] for _ in range(n)]
-dp[0][0] = 1
-dp[0][1] = 0
-dp[1][0] = 1
-dp[1][1] = 1
+for i in range(1000):
+    dp[i][1] = 1
+    dp[1][i] = 2
 
-if a[1] > a[0]:
-    dp[1][0] = 2
+for n in range(2, 1000):
+    for k in range(2, 1000):
+        dp[n][k] = sum([dp[i][k-1] for i in range(n)])
 
-for i in range(2, n):
 
-    if a[i] > a[i-1]:
-        dp[i][0] = dp[i-1][0]
-    else:
-        dp[i][0] = 1
+for _ in range(inp()):
 
-    if a[i] <= a[i-1]:
-        if a[i] > a[i-2]:
-            dp[i][1] = max(dp[i-2][0]+1, dp[i-1][1] + 1)
-        else:
-            dp[i][1] = dp[i-1][1] + 1
-    else:
-        dp[i][1] = 1
+    n, k = invr()
 
-print dp
+    print dp[n][k]
+
+
+
+
 
 
 

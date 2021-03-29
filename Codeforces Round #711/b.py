@@ -4,7 +4,7 @@ import sys
 input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
-from collections import Counter, deque
+from collections import Counter, deque, defaultdict
 from copy import deepcopy as dc
 
 
@@ -54,37 +54,44 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
+#
+# r = raw_input()
+        
+for _ in range(inp()):
+    n, w = invr()
+    arr = invr()
 
-r = raw_input()
+    arr.sort(reverse=True)
 
-n = inp()
-a = invr()
+    ca = Counter(arr)
 
-dp = [[0,0] for _ in range(n)]
-dp[0][0] = 1
-dp[0][1] = 0
-dp[1][0] = 1
-dp[1][1] = 1
+    keys = [a for a in ca]
+    keys.sort(reverse=True)
 
-if a[1] > a[0]:
-    dp[1][0] = 2
+    s = sum(arr)
+    i = 0
+    count = 0
 
-for i in range(2, n):
-
-    if a[i] > a[i-1]:
-        dp[i][0] = dp[i-1][0]
-    else:
-        dp[i][0] = 1
-
-    if a[i] <= a[i-1]:
-        if a[i] > a[i-2]:
-            dp[i][1] = max(dp[i-2][0]+1, dp[i-1][1] + 1)
-        else:
-            dp[i][1] = dp[i-1][1] + 1
-    else:
-        dp[i][1] = 1
-
-print dp
+    while s > 0:
+        count += 1
+        cur = w 
+        i = 0
+        while i < len(keys):
+            element = keys[i]
+            if ca[element] == 0:
+                i += 1
+                continue
+            else:
+                if element <= cur and ca[element] > 0:
+                    cur -= element
+                    s -= element
+                    ca[element] -= 1
+                else:
+                    i += 1
+                    continue
+        
+    print count
+        
 
 
 

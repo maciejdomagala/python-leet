@@ -4,7 +4,7 @@ import sys
 input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
-from collections import Counter, deque
+from collections import Counter
 from copy import deepcopy as dc
 
 
@@ -54,37 +54,28 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-
-r = raw_input()
-
-n = inp()
-a = invr()
-
-dp = [[0,0] for _ in range(n)]
-dp[0][0] = 1
-dp[0][1] = 0
-dp[1][0] = 1
-dp[1][1] = 1
-
-if a[1] > a[0]:
-    dp[1][0] = 2
-
-for i in range(2, n):
-
-    if a[i] > a[i-1]:
-        dp[i][0] = dp[i-1][0]
+def computeGCD(x, y):
+  
+    if x > y:
+        small = y
     else:
-        dp[i][0] = 1
-
-    if a[i] <= a[i-1]:
-        if a[i] > a[i-2]:
-            dp[i][1] = max(dp[i-2][0]+1, dp[i-1][1] + 1)
-        else:
-            dp[i][1] = dp[i-1][1] + 1
-    else:
-        dp[i][1] = 1
-
-print dp
+        small = x
+    for i in range(1, small+1):
+        if((x % i == 0) and (y % i == 0)):
+            gcd = i
+              
+    return gcd
 
 
+# r = raw_input()
+        
+for _ in range(inp()):
 
+    n = inp()
+    s = sum([int(a) for a in str(n)])
+
+    while computeGCD(n, s) == 1:
+        n += 1
+        s = sum([int(a) for a in str(n)])
+
+    print n
