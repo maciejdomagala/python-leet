@@ -7,7 +7,7 @@ from math import sqrt, floor, ceil
 from collections import Counter, deque, defaultdict
 from copy import deepcopy as dc
 
-sys.setrecursionlimit(10**10)
+# sys.setrecursionlimit(10**6)
 
 
 ############ ---- Input Functions ---- ############
@@ -57,22 +57,41 @@ def binomial(n, k):
         return div 
 
 #
-r = raw_input()
+# r = raw_input()
 
-def f(n, k, start):
+def prefix(arr):
 
-    if n == 0:
-        return 1
-    
-    if k == 1:
-        return 1
-
-    return f(n-1, k, start) + f(start-n+1, k-1, start)
-
+    return [sum(arr[:i+1]) for i in range(len(arr))]
 
 for _ in range(inp()):
-
     n, k = invr()
-    start = n
 
-    print f(n, k, start)
+    if k == 1:
+        print 1
+        continue
+    if n == 1:
+        print 2
+        continue
+
+    #from now on, assume n and k are >= 2.
+
+    arr = [1] + [0]*(n-2)
+    ans = 2
+    deq = deque(arr)
+    
+    while k > 1:
+        temp = 0
+        for i in range(n-1):
+            temp += deq.popleft()
+            deq.append(temp)
+            ans += temp
+
+        deq.reverse()
+        temp = 0
+        k -= 1
+
+    print ans % (10**9+7)
+
+
+
+
