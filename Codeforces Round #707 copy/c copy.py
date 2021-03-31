@@ -59,26 +59,20 @@ def binomial(n, k):
 #
 # r = raw_input()
 
-n = inp()
-arr = invr()
 
-d = {}
 
-for i in range(n):
-    for j in range(i):
-        s = arr[i] + arr[j]
+n = int(raw_input())
+nums = raw_input()
+arr = [int(a) for a in nums.split(" ")]
 
-        if s in d:
-            if len(set([i+1, j+1, d[s][0]+1, d[s][1]+1])) == 4:
-                print 'YES'
-                print i+1, j+1, d[s][0]+1, d[s][1]+1
-                sys.exit()
-            else:
-                continue
-        else:
-            d[s] = (i, j)
+one = arr[0]
+two = arr[1]
 
-print 'NO'
-        
-
--
+i = 2
+while i < n:
+    step =  min(one, two) + arr[i]
+    one, two = two, step
+    
+    i += 1
+    
+print min(one, two)

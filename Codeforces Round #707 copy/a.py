@@ -4,10 +4,8 @@ import sys
 input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
-from collections import Counter, deque, defaultdict
+from collections import Counter
 from copy import deepcopy as dc
-
-# sys.setrecursionlimit(10**6)
 
 
 ############ ---- Input Functions ---- ############
@@ -56,29 +54,44 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-#
+def computeGCD(x, y):
+  
+    if x > y:
+        small = y
+    else:
+        small = x
+    for i in range(1, small+1):
+        if((x % i == 0) and (y % i == 0)):
+            gcd = i
+              
+    return gcd
+
+
 # r = raw_input()
 
-n = inp()
-arr = invr()
+for _ in range(inp()):
+    n = inp()
+    arr=[]
+    last_point = 0
+    travel_cost=[]
 
-d = {}
+    for _ in range(n):
+        point1, point2 = invr()
+        arr.append((point1, point2))
+        travel_cost.append(point1-last_point)
+        last_point=point2
 
-for i in range(n):
-    for j in range(i):
-        s = arr[i] + arr[j]
+    time = invr()
 
-        if s in d:
-            if len(set([i+1, j+1, d[s][0]+1, d[s][1]+1])) == 4:
-                print 'YES'
-                print i+1, j+1, d[s][0]+1, d[s][1]+1
-                sys.exit()
-            else:
-                continue
-        else:
-            d[s] = (i, j)
-
-print 'NO'
-        
-
--
+    cur=0
+    last_point = 0
+    i = 0
+    for point, t, travel in zip(arr, time, travel_cost):
+        diff = int(ceil((point[1]-point[0])/2))
+        cur = cur + travel + t + diff
+        if i == n-1:
+            print cur-diff
+            break
+    
+        cur = max(cur, point[1])
+        i += 1

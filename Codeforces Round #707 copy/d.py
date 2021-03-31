@@ -4,10 +4,8 @@ import sys
 input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
-from collections import Counter, deque, defaultdict
+from collections import Counter, deque
 from copy import deepcopy as dc
-
-# sys.setrecursionlimit(10**6)
 
 
 ############ ---- Input Functions ---- ############
@@ -56,29 +54,37 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-#
-# r = raw_input()
+
+r = raw_input()
 
 n = inp()
-arr = invr()
+a = invr()
 
-d = {}
+dp = [[0,0] for _ in range(n)]
+dp[0][0] = 1
+dp[0][1] = 0
+dp[1][0] = 1
+dp[1][1] = 1
 
-for i in range(n):
-    for j in range(i):
-        s = arr[i] + arr[j]
+if a[1] > a[0]:
+    dp[1][0] = 2
 
-        if s in d:
-            if len(set([i+1, j+1, d[s][0]+1, d[s][1]+1])) == 4:
-                print 'YES'
-                print i+1, j+1, d[s][0]+1, d[s][1]+1
-                sys.exit()
-            else:
-                continue
+for i in range(2, n):
+
+    if a[i] > a[i-1]:
+        dp[i][0] = dp[i-1][0]
+    else:
+        dp[i][0] = 1
+
+    if a[i] <= a[i-1]:
+        if a[i] > a[i-2]:
+            dp[i][1] = max(dp[i-2][0]+1, dp[i-1][1] + 1)
         else:
-            d[s] = (i, j)
+            dp[i][1] = dp[i-1][1] + 1
+    else:
+        dp[i][1] = 1
 
-print 'NO'
-        
+print dp
 
--
+
+

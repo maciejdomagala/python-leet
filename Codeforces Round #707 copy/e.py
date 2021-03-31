@@ -4,10 +4,8 @@ import sys
 input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
-from collections import Counter, deque, defaultdict
+from collections import Counter, deque
 from copy import deepcopy as dc
-
-# sys.setrecursionlimit(10**6)
 
 
 ############ ---- Input Functions ---- ############
@@ -56,29 +54,44 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-#
+
 # r = raw_input()
 
-n = inp()
-arr = invr()
+for _ in range(inp()):
+    n = inp()
+    arr = invr()
 
-d = {}
+    ans_small = [0]*n
+    ans_big = [0]*n
 
-for i in range(n):
-    for j in range(i):
-        s = arr[i] + arr[j]
+    ans_small[0] = arr[0]
+    ans_big[0] = arr[0]
 
-        if s in d:
-            if len(set([i+1, j+1, d[s][0]+1, d[s][1]+1])) == 4:
-                print 'YES'
-                print i+1, j+1, d[s][0]+1, d[s][1]+1
-                sys.exit()
-            else:
-                continue
+    small, big = deque([]), deque([])
+
+    for i in range(1, arr[0]):
+        small.append(i)
+        big.append(i)
+
+    cur = arr[0]
+
+    for i in range(1, n):
+        if arr[i] != arr[i-1]:
+            ans_small[i] = arr[i]
+            ans_big[i] = arr[i]
+
+            for i in range(cur+1, arr[i]):
+                small.append(i)
+                big.append(i)
+
+            cur = arr[i]
+
         else:
-            d[s] = (i, j)
+            ans_small[i] = small.popleft()
+            ans_big[i] = big.pop()
 
-print 'NO'
-        
+    print ' '.join([str(a) for a in ans_small])
+    print ' '.join([str(a) for a in ans_big])
 
--
+
+
