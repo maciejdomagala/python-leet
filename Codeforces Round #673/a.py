@@ -4,10 +4,8 @@ import sys
 input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
-from collections import Counter, deque, defaultdict
+from collections import Counter
 from copy import deepcopy as dc
-
-# sys.setrecursionlimit(10**6)
 
 
 ############ ---- Input Functions ---- ############
@@ -56,12 +54,35 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-r = raw_input()
+def computeGCD(x, y):
+  
+    if x > y:
+        small = y
+    else:
+        small = x
+    for i in range(1, small+1):
+        if((x % i == 0) and (y % i == 0)):
+            gcd = i
+              
+    return gcd
+
+
+# r = raw_input()
 
 for _ in range(inp()):
     n, k = invr()
-
-
     arr = invr()
 
-    
+    arr.sort(reverse=True)
+
+    smallest = arr[-1]
+    c = 0
+
+    for i in range(n-1):
+        while arr[i] + smallest <= k:
+            arr[i] += smallest
+            c += 1
+        
+
+    print c
+        
