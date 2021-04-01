@@ -69,13 +69,35 @@ def computeGCD(x, y):
 
 # r = raw_input()
 
-n = inp()
-ans= 0
+for _ in range(inp()):
+    n = inp()
+    points = []
+    f = True
 
-for i in range(1,n+1):
-    ans += 1/i
+    for _ in range(n):
+        x, y = invr()
+        p = (x,y)
 
-print ans
+        points.append(p)
 
+    points = sorted(points, key= lambda x: (x[0], x[1]))
+    points.insert(0, (0,0))
+ 
+    dist = []
 
+    for i in range(1, n+1):
+        if points[i][1] < points[i-1][1]:
+            f = False
+            break
+        else:
+            right = (points[i][0]-points[i-1][0])
+            up = (points[i][1]-points[i-1][1])
+            
+            dist.append('R'*right)
+            dist.append('U'*up)
 
+    if f:
+        print 'YES'
+        print ''.join(dist)
+    else:
+        print 'NO'

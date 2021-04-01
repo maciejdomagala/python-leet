@@ -70,26 +70,20 @@ def computeGCD(x, y):
 # r = raw_input()
 
 for _ in range(inp()):
-    n, s, k = invr()
-    arr = invr()
-    sett = set(arr)
-    mn1, mn2 = float('inf'), float('inf')
-    i = 0
+    a,b,c,n = invr()
 
-    while s+i <= n and i < 1002:
-        if s+i not in sett:
-            mn1 = i
-            break
-        i += 1
-    i = 0
+    mx = max(a,b,c)
 
-    while i < s and i < 1002:
-        if s-i not in sett:
-            mn2 = i
-            break
-        i += 1
-    
-    
-    print min(mn1, mn2) 
+    cur = 0
 
+    for s in [a,b,c]:
+        cur += mx-s
+
+    if cur > n:
+        print 'NO'
+    else:
+        if (n-cur) % 3 == 0:
+            print 'YES'
+        else:
+            print 'NO'
 

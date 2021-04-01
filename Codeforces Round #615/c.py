@@ -68,31 +68,29 @@ def computeGCD(x, y):
 
 
 # r = raw_input()
-lava = 0
-n, q = invr()
-s = set()
-for _ in range(q):
-    x, y = invr()
-    p = (x, y)
 
-    for i in range(y-1, y+2):
-        if x == 1:
-            h = 2
+for _ in range(inp()):
+    n = inp()
+    z = prime_factorization(n)
+    ans = set()
+    temp = 1
+
+    for i, a in enumerate(z):
+        if len(ans) >= 2:
+            temp *= a
         else:
-            h = 1
-        w = (h, i)
-        if w in s:
-            if p in s:
-                lava -= 1
+            if a not in ans:
+                ans.add(a)
             else:
-                lava += 1
-            
-    if p in s:
-        s.remove(p)
-    else:
-        s.add(p)
+                temp *= a
+                if temp not in ans:
+                    ans.add(temp)
+                    temp = 1
 
-    if lava > 0:
-        print 'No'
+    if temp != 1 and temp not in ans and len(ans) == 2:
+        ans.add(temp)
+        print 'YES'
+        print ' '.join(str(a) for a in list(ans))
     else:
-        print 'Yes'
+        print 'NO'
+
