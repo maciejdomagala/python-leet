@@ -1,11 +1,10 @@
 
 from __future__ import division
-from __builtin__ import xrange as range
-from future_builtins import ascii, filter, hex, map, oct, zip
 import sys
 input = sys.stdin.readline
+import math
 from math import sqrt, floor, ceil
-from collections import Counter, defaultdict
+from collections import Counter
 from copy import deepcopy as dc
 
 
@@ -55,7 +54,7 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-def gcd(x, y):
+def computeGCD(x, y):
   
     if x > y:
         small = y
@@ -68,28 +67,29 @@ def gcd(x, y):
     return gcd
 
 
-r = raw_input()
+# r = raw_input()
 
 for _ in range(inp()):
-    n = inp()
+    n, s, k = invr()
     arr = invr()
+    sett = set(arr)
+    mn1, mn2 = float('inf'), float('inf')
+    i = 0
 
-    d = defaultdict(list)
-    for i, a in enumerate(arr):
-        d[a].append(i)
+    while s+i <= n and i < 1002:
+        if s+i not in sett:
+            mn1 = i
+            break
+        i += 1
+    i = 0
 
-
-    for el in d:
-        for i in range(len(d[el]) + 1):
-            if i == 0:
-                mn = arr[i]-0
-            elif i == len(d[el]):
-                mn = max(mn, n-arr[-1])
-            else:
-                mn = max(mn, arr[i]-arr[i-1])
-
-        d[el] = mn
-
-    print d
+    while i < s and i < 1002:
+        if s-i not in sett:
+            mn2 = i
+            break
+        i += 1
+    
+    
+    print min(mn1, mn2) 
 
 

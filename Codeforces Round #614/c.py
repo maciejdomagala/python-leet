@@ -1,9 +1,8 @@
 
 from __future__ import division
-from __builtin__ import xrange as range
-from future_builtins import ascii, filter, hex, map, oct, zip
 import sys
 input = sys.stdin.readline
+import math
 from math import sqrt, floor, ceil
 from collections import Counter, defaultdict
 from copy import deepcopy as dc
@@ -55,7 +54,7 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-def gcd(x, y):
+def computeGCD(x, y):
   
     if x > y:
         small = y
@@ -68,28 +67,32 @@ def gcd(x, y):
     return gcd
 
 
-r = raw_input()
+# r = raw_input()
+lava = 0
+n, q = invr()
+s = set()
+for _ in range(q):
+    x, y = invr()
+    p = (x, y)
 
-for _ in range(inp()):
-    n = inp()
-    arr = invr()
-
-    d = defaultdict(list)
-    for i, a in enumerate(arr):
-        d[a].append(i)
-
-
-    for el in d:
-        for i in range(len(d[el]) + 1):
-            if i == 0:
-                mn = arr[i]-0
-            elif i == len(d[el]):
-                mn = max(mn, n-arr[-1])
+    for i in range(y-1, y+2):
+        if x == 1:
+            h = 2
+        else:
+            h = 1
+        w = (h, i)
+        if w in s:
+            if p in s:
+                lava -= 1
             else:
-                mn = max(mn, arr[i]-arr[i-1])
+                lava += 1
+            
+    if p in s:
+        s.remove(p)
+    else:
+        s.add(p)
 
-        d[el] = mn
-
-    print d
-
-
+    if lava > 0:
+        print 'No'
+    else:
+        print 'Yes'
