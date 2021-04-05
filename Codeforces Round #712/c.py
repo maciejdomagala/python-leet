@@ -4,7 +4,7 @@ import sys
 input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
-from collections import Counter
+from collections import Counter, deque, defaultdict
 from copy import deepcopy as dc
 
 
@@ -54,48 +54,47 @@ def binomial(n, k):
         div = a // (b * c)
         return div 
 
-def computeGCD(x, y):
-  
-    if x > y:
-        small = y
-    else:
-        small = x
-    for i in range(1, small+1):
-        if((x % i == 0) and (y % i == 0)):
-            gcd = i
-              
-    return gcd
-
-
-r = raw_input()
-
+#
+# r = raw_input()
+        
 for _ in range(inp()):
     n = inp()
-    arr = invr()
+    s = raw_input()
 
-    i = 0
-    c1, c2 = 0,0
-    while i < n:
-        if arr[i] >= i:
-            c1 = i
+    ones = s.count('1')
+
+    ans1 = []
+    ans2 = []
+
+    c0 = 0
+    c1 = 0
+
+    if s[0] != '1' or s[-1] != '1':
+        print 'NO'
+        continue
+
+    if ones % 2 == 1:
+        print 'NO'
+        continue
+
+    for a in s:
+        if a == '1':
+            c1 += 1
+            if c1 <= ones//2:
+                ans1.append('(') 
+                ans2.append('(') 
+            else:
+                ans1.append(')') 
+                ans2.append(')') 
         else:
-            break
-        i += 1
+            c0 += 1
+            if c0 % 2 == 1:
+                ans1.append('(')
+                ans2.append(')')
+            else:
+                ans2.append('(')
+                ans1.append(')')
 
-    i = n-1
-    while i > 0:
-        if arr[i] >= n-i-1:
-            c2 = i
-        else:
-            break
-        i -= 1
-
-    if c1 >= c2:
-        if arr[c1] == arr[c2]:
-            print 'Yes'
-        else:
-            print 'No'
-    else:
-        print 'No'
-
-
+    print 'YES'
+    print ''.join(ans1)
+    print ''.join(ans2)

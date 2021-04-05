@@ -4,7 +4,7 @@ import sys
 input = sys.stdin.readline
 import math
 from math import sqrt, floor, ceil
-from collections import Counter
+from collections import Counter, deque
 from copy import deepcopy as dc
 
 
@@ -67,35 +67,51 @@ def computeGCD(x, y):
     return gcd
 
 
-r = raw_input()
+# r = raw_input()
 
-for _ in range(inp()):
-    n = inp()
-    arr = invr()
+#if s = 0 => -1 both
 
-    i = 0
-    c1, c2 = 0,0
-    while i < n:
-        if arr[i] >= i:
-            c1 = i
-        else:
+#for max
+m, s = invr()
+h = dc(s)
+
+if s == 0:
+    if m == 1:
+        print 0, 0
+    else:
+        print -1, -1
+    sys.exit()
+
+if 9*m < s:
+    print -1, -1
+    sys.exit()
+    
+ans = []
+i = 0
+while i < m:
+    if s >= 9:
+        ans.append(9)
+        s -= 9
+    else:
+        ans.append(s)
+        s = 0
+
+    i += 1
+
+if s > 0:
+    mx = -1
+
+#for min
+mn = ans[::-1]
+
+if mn[0] == 0:
+    i = 1
+    while i < len(ans):
+        if mn[i] != 0:
+            mn[i] -= 1
+            mn[0] = 1
             break
+
         i += 1
 
-    i = n-1
-    while i > 0:
-        if arr[i] >= n-i-1:
-            c2 = i
-        else:
-            break
-        i -= 1
-
-    if c1 >= c2:
-        if arr[c1] == arr[c2]:
-            print 'Yes'
-        else:
-            print 'No'
-    else:
-        print 'No'
-
-
+print ''.join([str(a) for a in mn]), ''.join([str(a) for a in ans])

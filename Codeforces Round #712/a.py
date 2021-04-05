@@ -67,35 +67,23 @@ def computeGCD(x, y):
     return gcd
 
 
-r = raw_input()
-
+# r = raw_input()
+        
 for _ in range(inp()):
-    n = inp()
-    arr = invr()
 
-    i = 0
-    c1, c2 = 0,0
-    while i < n:
-        if arr[i] >= i:
-            c1 = i
-        else:
-            break
-        i += 1
+    s = raw_input()
+    n = len(s)
+    if s.count('a') == n:
+        print 'NO'
+        continue
 
-    i = n-1
-    while i > 0:
-        if arr[i] >= n-i-1:
-            c2 = i
-        else:
-            break
-        i -= 1
-
-    if c1 >= c2:
-        if arr[c1] == arr[c2]:
-            print 'Yes'
-        else:
-            print 'No'
     else:
-        print 'No'
+        ind = float('inf')
+        for i, el in enumerate(s):
+            if el != 'a':
+                ind = i
 
+        s = s[:n-ind-1] + 'a' + s[n-ind-1:]
 
+        print 'YES'
+        print s
