@@ -140,6 +140,7 @@ for _ in range(n):
 vis = set()
 c = 0
 
+
 for i in lang:
     if i not in vis:
         que = deque([i])
