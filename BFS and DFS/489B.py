@@ -103,36 +103,25 @@ def bfs2(n, m):
                 que.append(2*el)
                 dep[2*el] = dep[el] + 1
 
+#for binary tree
+class Node:
+    # Initialize the attributes of Node
+    def __init__(self, data):
+        self.left = None # Left Child
+        self.right = None # Right Child
+        self.data = data # Node Data
 
+#for graphs
 
-# r = raw_input()
+a, b = invr()
+arr = invr()
 
-n, m = invr()
+i = 0
+while i <= b:
+    if i == b:
+        print 'YES'
+        sys.exit()
 
-#if m > n - we should only differantiate
-#use bfs algo
+    i += arr[i-1]
 
-def bfs2(n, m):
-    vis = set()
-    que = deque([n])
-    dep = defaultdict(int)
-    dep[n] = 0
-
-    while True:
-        while que:
-            el = que.popleft()
-            vis.add(el)
-
-            if el == m:
-                print dep[el]
-                return
-
-            if el-1 not in vis and el-1 > 0:
-                que.append(el-1)
-                dep[el-1] = dep[el] + 1
-            if 2*el not in vis and 2*el < 2*m:
-                que.append(2*el)
-                dep[2*el] = dep[el] + 1
-
-
-bfs2(n, m)
+print 'NO'
