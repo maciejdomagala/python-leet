@@ -137,6 +137,7 @@ for _ in range(n):
                 lang.append(arr[i]-1)
 
 
+
 vis = set()
 c = 0
 
